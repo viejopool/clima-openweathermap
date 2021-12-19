@@ -2,7 +2,7 @@
     <nz-form-item>
       <nz-form-control nzErrorTip="Escriba el nombre de la ciudad">
         <nz-input-group nzPrefixIcon="user">
-          <input  formControlName="ciudad" nz-input placeholder="Username" (ngModelChange)="onChange($event)" [nzAutocomplete]="auto"/>
+          <input  formControlName="ciudad" nz-input placeholder="Escriba la Ciudad" (ngModelChange)="onChange($event)" [nzAutocomplete]="auto"/>
           <nz-autocomplete [nzDataSource]="arrCiudades" #auto></nz-autocomplete>
         </nz-input-group>
       </nz-form-control>
