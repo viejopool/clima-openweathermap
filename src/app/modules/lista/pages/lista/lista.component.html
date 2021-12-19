@@ -1,0 +1,16 @@
+<nz-descriptions class="margen"
+      [nzTitle]='ciudadBuscada.ciudad'
+      nzBordered
+      [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
+    >
+      <nz-descriptions-item nzTitle="Ciudad">{{ciudadBuscada.ciudad}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="País">{{ciudadBuscada.pais}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Temperatura °C">{{ciudadBuscada.temperatura }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Latitud">{{ciudadBuscada.lat}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Longitud">{{ciudadBuscada.lon}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Temperatura Max °C">{{ciudadBuscada.tmax }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Temperatura Min °C">{{ciudadBuscada.tmin }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Clima">{{ciudadBuscada.clima }}</nz-descriptions-item>
+    </nz-descriptions>
+    
+    <!-- {{ciudadBuscada | json}} -->

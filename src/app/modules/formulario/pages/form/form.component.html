@@ -1,0 +1,16 @@
+<form nz-form [nzLayout]="'inline'" [formGroup]="busquedaForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Escriba el nombre de la ciudad">
+        <nz-input-group nzPrefixIcon="user">
+          <input  formControlName="ciudad" nz-input placeholder="Username" (ngModelChange)="onChange($event)" [nzAutocomplete]="auto"/>
+          <nz-autocomplete [nzDataSource]="arrCiudades" #auto></nz-autocomplete>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button type="submit" nzType="primary" nzShape="circle" [disabled]="!busquedaForm.valid"><i nz-icon nzType="search"></i></button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+<app-lista *ngIf='displayList' ></app-lista>
