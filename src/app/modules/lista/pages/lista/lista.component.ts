@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ClimaciudadService } from 'src/app/shared/servicios/climaciudad.service';
+
 
 @Component({
   selector: 'app-lista',
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.css']
 })
-export class ListaComponent implements OnInit {
+export class ListaComponent implements OnInit, OnDestroy {
 
   ciudadBuscada:any;
+  suscripcion!:Subscription;
 //  ciudadService:string;
 
   constructor(private _climaService:ClimaciudadService) { 
@@ -17,8 +20,11 @@ export class ListaComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    this._climaService.getCiudadClima().subscribe(data=>{this.ciudadBuscada=data
+    this.suscripcion.add(this._climaService.getCiudadClima().subscribe(data=>{this.ciudadBuscada=data
       console.log(data)
-    })
+    }))
+  }
+  ngOnDestroy(): void {
+      this.suscripcion.unsubscribe()
   }
 }

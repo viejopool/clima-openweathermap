@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClimaciudadService } from '../../../../shared/servicios/climaciudad.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -9,13 +9,14 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit,OnDestroy {
   busquedaForm: FormGroup;
   arrCiudades: Array<any>;
   obsCiudades$: Observable<any>;
   onlyCiudades: any[];
   datosClima!: any;
   displayList: boolean;
+  suscripcion!: Subscription
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +47,7 @@ export class FormComponent implements OnInit {
     );
   }
   submitForm() {
-    this._ciudadesService
+    this.suscripcion.add(this._ciudadesService
       .getClimaCiudad(this.busquedaForm.get('ciudad')?.value)
       .subscribe(
         (data) => {
@@ -66,8 +67,12 @@ export class FormComponent implements OnInit {
         (e) => {
           this._msnService.error(e.error.message, { nzDuration: 4000 });
         }
-      );
+      ))
+      ;
 
     this.busquedaForm.reset();
+  }
+  ngOnDestroy(): void {
+      this.suscripcion.unsubscribe()
   }
 }
